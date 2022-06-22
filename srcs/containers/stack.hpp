@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:15:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/06/22 15:26:19 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 15:36:36 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,6 @@ namespace ft
 				this->c.pop_back();
 			}
 
-			template < class T, class Container >
-			friend bool operator==( const ft::stack< T, Container >& lhs, const ft::stack< T, Container >& rhs );
-
 		protected:
 			/**
 			 * the underlying container.
@@ -137,11 +134,6 @@ namespace ft
 			container_type	c;
 
 	};
-
-	template < class T, class Container >
-	bool operator==( const ft::stack< T, Container >& lhs, const ft::stack< T, Container >& rhs )
-	{
-	}
 
 }
 
