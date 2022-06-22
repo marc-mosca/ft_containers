@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:17:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/06/22 17:41:24 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 17:56:38 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ namespace ft
 		}
 
 	};
+
+	template < typename T1, typename T2 >
+	ft::Pair < T1, T2 > make_pair( T1 t, T2 u )
+	{
+		return ( Pair(t, u) );
+	}
 
 }
 
