@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:15:54 by mmosca            #+#    #+#             */
-/*   Updated: 2022/06/22 16:26:11 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 16:31:07 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,42 @@ namespace ft
 				this->c.pop_back();
 			}
 
+			//	~~	Lexicographically compares the values in the stack. 
+
 			template < class Tx, class Containerx >
 			friend bool operator==( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
 			{
 				return ( lhs.c == rhs.c );
+			}
+
+			template < class Tx, class Containerx >
+			friend bool operator!=( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
+			{
+				return ( lhs.c != rhs.c );
+			}
+
+			template < class Tx, class Containerx >
+			friend bool operator<( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
+			{
+				return ( lhs.c < rhs.c );
+			}
+
+			template < class Tx, class Containerx >
+			friend bool operator<=( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
+			{
+				return ( lhs.c <= rhs.c );
+			}
+
+			template < class Tx, class Containerx >
+			friend bool operator>( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
+			{
+				return ( lhs.c > rhs.c );
+			}
+
+			template < class Tx, class Containerx >
+			friend bool operator>=( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
+			{
+				return ( lhs.c >= rhs.c );
 			}
 
 		protected:
