@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:17:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/06/22 17:21:01 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 17:31:41 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ namespace ft
 
 		first_type	first;
 		second_type	second;
+
+		//	~~	Constructors
+
+		pair() : first(), second()
+		{
+		}
+
+		pair( const T1& x, const T2& y ) : first(x), second(y)
+		{
+		}
+
+		template< class U1, class U2 >
+		pair( const pair<U1, U2>& p ) : first(p.first), second(p.second)
+		{
+		}
 
 	};
 
