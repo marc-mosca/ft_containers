@@ -6,13 +6,10 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:15:54 by mmosca            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/06/22 16:22:37 by mmosca           ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/06/22 15:36:36 by mmosca           ###   ########lyon.fr   */
->>>>>>> 53c411569eb424c8504ff25c3e9ec2e4ea3420df
+/*   Updated: 2022/06/22 16:26:11 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STACK_HPP
 # define STACK_HPP
