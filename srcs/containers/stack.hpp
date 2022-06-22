@@ -131,15 +131,12 @@ namespace ft
 				this->c.pop_back();
 			}
 
-<<<<<<< HEAD
 			template < class Tx, class Containerx >
 			friend bool operator==( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
 			{
 				return ( lhs.c == rhs.c );
 			}
 
-=======
->>>>>>> 53c411569eb424c8504ff25c3e9ec2e4ea3420df
 		protected:
 			/**
 			 * the underlying container.
