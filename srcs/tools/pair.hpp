@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:17:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/06/22 17:31:41 by mmosca           ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 17:41:24 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ namespace ft
 {
 	
 	template < class T1, class T2 >
-	struct pair
+	struct Pair
 	{
 		
 		//	~~	Members types
@@ -32,17 +32,37 @@ namespace ft
 
 		//	~~	Constructors
 
-		pair() : first(), second()
+		Pair() : first(), second()
 		{
 		}
 
-		pair( const T1& x, const T2& y ) : first(x), second(y)
+		Pair( const T1 &x, const T2 &y ) : first(x), second(y)
 		{
 		}
 
-		template< class U1, class U2 >
-		pair( const pair<U1, U2>& p ) : first(p.first), second(p.second)
+		template< typename U1, typename U2 >
+		Pair( const Pair < U1, U2 > &p ) : first(p.first), second(p.second)
 		{
+		}
+
+		Pair( const Pair < T1, T2 > &p ) : first(p.first), second(p.second)
+		{
+		}
+
+		//	~~	Destructor
+
+		~Pair()
+		{
+		}
+
+		//	~~	Operator
+
+		template < typename U1, typename U2 >
+		Pair < T1, T2 >	&operator=( const Pair < U1, U2 > &other )
+		{
+			this->first = other.first;
+			this->second = other.second;
+			return ( *this );
 		}
 
 	};
