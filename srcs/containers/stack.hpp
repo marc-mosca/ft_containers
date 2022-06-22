@@ -6,7 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 13:15:54 by mmosca            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/06/22 16:22:37 by mmosca           ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/06/22 15:36:36 by mmosca           ###   ########lyon.fr   */
+>>>>>>> 53c411569eb424c8504ff25c3e9ec2e4ea3420df
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +131,15 @@ namespace ft
 				this->c.pop_back();
 			}
 
+<<<<<<< HEAD
 			template < class Tx, class Containerx >
 			friend bool operator==( const ft::stack< Tx, Containerx >& lhs, const ft::stack< Tx, Containerx >& rhs )
 			{
 				return ( lhs.c == rhs.c );
 			}
 
+=======
+>>>>>>> 53c411569eb424c8504ff25c3e9ec2e4ea3420df
 		protected:
 			/**
 			 * the underlying container.
