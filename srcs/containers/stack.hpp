@@ -10,176 +10,137 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef STACK_HPP
-# define STACK_HPP
+#define STACK_HPP
 
-# include <vector>
+#include <vector>
 
-namespace ft
-{
+namespace ft {
 
-	template < class T, class Container = std::vector<T> >
-	class Stack
-	{
+	template<class T, class Container = std::vector<T> >
+	class stack {
 
-		public:
-			/**
-			 *	The first template parameter (T). 
-			 */
-			typedef Container::value_type		value_type;
+	public:
+		typedef Container	container_type;
+		typedef typename Container::value_type	value_type;
+		typedef typename Container::size_type	size_type;
+		typedef typename Container::reference	reference;
+		typedef typename Container::const_reference	const_reference;
 
-			/**
-			 *	The second template parameter (Container).
-			 */
-			typedef Container					container_type;
+		explicit stack(const Container &cont = Container());
+		~stack();
+		stack &operator=(const stack &other);
+		reference top();
+		const_reference top() const;
+		bool empty() const;
+		size_type size() const;
+		void push(const value_type &value);
+		void pop();
 
-			/**
-			 *	An unsigned integral type.
-			 */
-			typedef Container::size_type		size_type;
+		template<class Tx, class Containerx>
+		friend bool operator==(const ft::stack<Tx, Containerx> &lhs, const ft::stack<Tx, Containerx> &rhs);
+		template<class Tx, class Containerx>
+		friend bool operator!=(const ft::stack<Tx, Containerx> &lhs, const ft::stack<Tx, Containerx> &rhs);
+		template<class Tx, class Containerx>
+		friend bool operator<(const ft::stack<Tx, Containerx> &lhs, const ft::stack<Tx, Containerx> &rhs);
+		template<class Tx, class Containerx>
+		friend bool operator<=(const ft::stack<Tx, Containerx> &lhs, const ft::stack<Tx, Containerx> &rhs);
+		template<class Tx, class Containerx>
+		friend bool operator>(const ft::stack<Tx, Containerx> &lhs, const ft::stack<Tx, Containerx> &rhs);
+		template<class Tx, class Containerx>
+		friend bool operator>=(const ft::stack<Tx, Containerx> &lhs, const ft::stack<Tx, Containerx> &rhs);
 
-			/**
-			 * A reference to value_type.
-			 */
-			typedef Container::reference		reference;
-			
-			/**
-			 * A const reference to value_type.
-			 */
-			typedef Container::const_reference	const_reference;
-
-		public:
-			/**
-			 * Constructs a stack container adaptor object.
-			 * 
-			 * @param ctnr container object
-			 */
-			explicit stack( const container_type& ctnr = container_type() )
-				: c(ctnr)
-			{
-			}
-
-			/**
-			 * Destroy the stack object.
-			 */
-			~stack()
-			{
-			}
-
-			/**
-			 * Check if the stack is empty or not.
-			 * 
-			 * @return if the stack is empty, returns true, otherwise return false
-			 */
-			bool empty() const
-			{
-				return ( (this->size() == 0) ? true : false );
-			}
-
-			/**
-			 * Computes the number of elements in the stack container.
-			 * 
-			 * @return the number of elements in the underlying container
-			 */
-			size_type size() const
-			{
-				return ( this->c.size() );
-			}
-
-			/**
-			 * Search and return a reference to the last element in the
-			 * container.
-			 * 
-			 * @return a reference to the last element in the container
-			 */
-			reference top()
-			{
-				return ( this->c.back() );
-			}
-
-			/**
-			 * Search and return a const reference to the last element in the
-			 * container.
-			 * 
-			 * @return a const reference to the last element in the container
-			 */
-			const_reference top() const
-			{
-				return ( this->c.back() );
-			}
-
-			/**
-			 * Inserts a new element at the top of the stack. The content of
-			 * this new element is initialized to a copy of val.
-			 * 
-			 * @param val value to which the inserted element is initialized
-			 */
-			void push( const_reference val )
-			{
-				this->c.push_back(val);
-			}
-
-			/**
-			 * Removes the top element from the stack.
-			 */
-			void pop()
-			{
-				this->c.pop_back();
-			}
-
-			//	~~	Lexicographically compares the values in the stack. 
-
-			template < class Tx, class Containerx >
-			friend bool operator==( const ft::stack< Tx, Containerx >& lhs, \
-				const ft::stack< Tx, Containerx >& rhs )
-			{
-				return ( lhs.c == rhs.c );
-			}
-
-			template < class Tx, class Containerx >
-			friend bool operator!=( const ft::stack< Tx, Containerx >& lhs, \
-				const ft::stack< Tx, Containerx >& rhs )
-			{
-				return ( lhs.c != rhs.c );
-			}
-
-			template < class Tx, class Containerx >
-			friend bool operator<( const ft::stack< Tx, Containerx >& lhs, \
-				const ft::stack< Tx, Containerx >& rhs )
-			{
-				return ( lhs.c < rhs.c );
-			}
-
-			template < class Tx, class Containerx >
-			friend bool operator<=( const ft::stack< Tx, Containerx >& lhs, \
-				const ft::stack< Tx, Containerx >& rhs )
-			{
-				return ( lhs.c <= rhs.c );
-			}
-
-			template < class Tx, class Containerx >
-			friend bool operator>( const ft::stack< Tx, Containerx >& lhs, \
-				const ft::stack< Tx, Containerx >& rhs )
-			{
-				return ( lhs.c > rhs.c );
-			}
-
-			template < class Tx, class Containerx >
-			friend bool operator>=( const ft::stack< Tx, Containerx >& lhs, \
-				const ft::stack< Tx, Containerx >& rhs )
-			{
-				return ( lhs.c >= rhs.c );
-			}
-
-		protected:
-			/**
-			 * the underlying container.
-			 */
-			container_type	c;
+	protected:
+		container_type c;
 
 	};
 
+	//	~~	Constructor
+
+	template<class T, class Container>
+	stack<T, Container>::stack(const Container &cont) : c(cont) {}
+
+	//	~~	Destructor
+
+	template<class T, class Container>
+	stack<T, Container>::~stack() {}
+
+	//	~~	Operator
+
+	template<class T, class Container>
+	stack<T, Container> &stack<T, Container>::operator=(const stack<T, Container> &other) {
+		this->c = other.c;
+		return *this;
+	}
+
+	//	~~	Element Access
+
+	template<class T, class Container>
+	typename stack<T, Container>::reference stack<T, Container>::top() {
+		return this->c.back();
+	}
+
+	template<class T, class Container>
+	typename stack<T, Container>::const_reference stack<T, Container>::top() const {
+		return this->c.back();
+	}
+
+	//	~~	Capacity
+
+	template<class T, class Container>
+	bool stack<T, Container>::empty() const {
+		return (this->size() == 0);
+	}
+
+	template<class T, class Container>
+	typename stack<T, Container>::size_type stack<T, Container>::size() const {
+		return this->c.size();
+	}
+
+	//	~~	Modifiers
+
+	template<class T, class Container>
+	void stack<T, Container>::push(const value_type &value) {
+		this->c.push_back(value);
+	}
+
+	template<class T, class Container>
+	void stack<T, Container>::pop() {
+		this->c.pop_back();
+	}
+
+	//	~~	Non-member functions
+
+	template<class Tx, class Containerx>
+	bool operator==(const stack<Tx, Containerx> &lhs, const stack<Tx, Containerx> &rhs) {
+		return (lhs.c == rhs.c);
+	}
+
+	template<class Tx, class Containerx>
+	bool operator!=(const stack<Tx, Containerx> &lhs, const stack<Tx, Containerx> &rhs) {
+		return (lhs.c != rhs.c);
+	}
+
+	template<class Tx, class Containerx>
+	bool operator<(const stack<Tx, Containerx> &lhs, const stack<Tx, Containerx> &rhs) {
+		return (lhs.c < rhs.c);
+	}
+
+	template<class Tx, class Containerx>
+	bool operator<=(const stack<Tx, Containerx> &lhs, const stack<Tx, Containerx> &rhs) {
+		return (lhs.c <= rhs.c);
+	}
+
+	template<class Tx, class Containerx>
+	bool operator>(const stack<Tx, Containerx> &lhs, const stack<Tx, Containerx> &rhs) {
+		return (lhs.c > rhs.c);
+	}
+
+	template<class Tx, class Containerx>
+	bool operator>=(const stack<Tx, Containerx> &lhs, const stack<Tx, Containerx> &rhs) {
+		return (lhs.c >= rhs.c);
+	}
+
 }
 
-#endif
+#endif // STACK_HPP
