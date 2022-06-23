@@ -16,7 +16,40 @@
 namespace ft
 {
 
+	template<class T, T v>
+	struct integral_constant {
 
+		//	~~	Member types
+
+		typedef T	value_type;
+		typedef integral_constant<T, v>	type;
+
+		//	~~	Member constant
+
+		const static T value = v;
+
+		//	~~	Member function
+
+		operator value_type() const;
+
+	};
+
+	template<class T, T v>
+	integral_constant<T, v>::value_type() {
+		return value;
+	}
+
+	typedef ft::integral_constant<bool, true>	true_type;
+	typedef ft::integral_constant<bool, false>	false_type;
+
+	template<class T>
+	struct is_integral {
+
+		//	~~	Member type
+
+		typedef bool	value_type;
+
+	};
 
 }
 
