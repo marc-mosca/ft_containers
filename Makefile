@@ -6,18 +6,18 @@
 #    By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/18 13:03:38 by mmosca            #+#    #+#              #
-#    Updated: 2022/06/18 13:16:25 by mmosca           ###   ########lyon.fr    #
+#    Updated: 2022/06/24 12:05:25 by mmosca           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ##	~~	Properties -------------------------------------------------------------
 
 NAME		:=	ft_containers
-INCS_DIR	:=	incs
-SRCS_DIR	:=	srcs
+INCS_DIR	:=	includes
+TESTS_DIR	:=	tests
 OBJS_DIR	:=	.objs
 CXXFLAGS	:=	-Wall -Wextra -Werror -std=c++98
-VPATH		:=	$(SRCS_DIR)/:$(SRCS_DIR)/containers:$(SRCS_DIR)/tools:
+VPATH		:=	$(TESTS_DIR)/:$(TESTS_DIR)/containers:$(TESTS_DIR)/tools:
 SRCS		:=	main.cpp
 OBJS		:=	$(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 

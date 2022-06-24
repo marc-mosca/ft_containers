@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   equal.hpp                                          :+:      :+:    :+:   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 17:17:25 by mmosca            #+#    #+#             */
-/*   Updated: 2022/06/20 17:21:39 by mmosca           ###   ########lyon.fr   */
+/*   Created: 2022/06/18 13:16:06 by mmosca            #+#    #+#             */
+/*   Updated: 2022/06/20 17:21:20 by mmosca           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EQUAL_HPP
-# define EQUAL_HPP
+#ifndef VECTOR_HPP
+#define VECTOR_HPP
 
 namespace ft
 {
