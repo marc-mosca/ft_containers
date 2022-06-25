@@ -13,8 +13,7 @@
 #ifndef IS_INTEGRAL_HPP
 #define IS_INTEGRAL_HPP
 
-namespace ft
-{
+namespace ft {
 
 	template<bool is_integral, typename T>
 	struct is_integral_res {
