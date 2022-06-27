@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enable_if.hpp                                      :+:      :+:    :+:   */
+/*   iterator_traits.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 10:44:07 by mmosca            #+#    #+#             */
-/*   Updated: 2022/06/27 16:10:02 by mmosca           ###   ########.fr       */
+/*   Created: 2022/06/27 16:04:30 by mmosca            #+#    #+#             */
+/*   Updated: 2022/06/27 16:05:35 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENABLE_IF_HPP
-#define ENABLE_IF_HPP
+#ifndef ITERATOR_TRAITS_HPP
+#define ITERATOR_TRAITS_HPP
 
 namespace ft
 {
-
-	template<bool B, class T = void>
-	struct enable_if
+	template<class Iter>
+	struct iterator_traits
 	{
+		typedef Iter::difference_type	difference_type;
+		typedef Iter::value_type		value_type;
+		typedef Iter::pointer			pointer;
+		typedef Iter::reference			reference;
+		typedef Iter::iterator_category	iterator_category;
 	};
-
-	template<class T = void>
-	struct enable_if<true, T>
-	{
-		//	~~	Member types ---------------------------------------------------
-		typedef T	type;
-	};
-
 }
 
-#endif // ENABLE_IF_HPP
+#endif // ITERATOR_TRAITS_HPP
