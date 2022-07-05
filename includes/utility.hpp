@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pair.hpp                                           :+:      :+:    :+:   */
+/*   utility.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 17:37:47 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/04 17:43:10 by mmosca           ###   ########.fr       */
+/*   Created: 2022/07/05 11:51:41 by mmosca            #+#    #+#             */
+/*   Updated: 2022/07/05 11:51:48 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CONTAINERS_PAIR_HPP
-#define FT_CONTAINERS_PAIR_HPP
+#ifndef FT_CONTAINERS_UTILITY_HPP
+#define FT_CONTAINERS_UTILITY_HPP
 
 namespace ft {
+
+	//	~~	PAIR ---------------------------------------------------------------
 
 	template<class T1, class T2>
 	struct pair {
@@ -68,4 +70,4 @@ namespace ft {
 
 }
 
-#endif //FT_CONTAINERS_PAIR_HPP
+#endif //FT_CONTAINERS_UTILITY_HPP

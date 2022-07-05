@@ -6,18 +6,18 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:14:22 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/04 13:30:05 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/05 11:18:06 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CONTAINERS_STACK_HPP
 #define FT_CONTAINERS_STACK_HPP
 
-#include <vector>
+#include "vector.hpp"
 
 namespace ft {
 
-	template<class T, class Container = std::vector<T> >
+	template<class T, class Container = ft::vector<T> >
 	class stack {
 	public:
 		typedef Container container_type;

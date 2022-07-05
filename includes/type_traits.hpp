@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_integral.hpp                                    :+:      :+:    :+:   */
+/*   type_traits.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 17:10:36 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/04 17:16:19 by mmosca           ###   ########.fr       */
+/*   Created: 2022/07/05 11:49:02 by mmosca            #+#    #+#             */
+/*   Updated: 2022/07/05 11:49:58 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CONTAINERS_IS_INTEGRAL_HPP
-#define FT_CONTAINERS_IS_INTEGRAL_HPP
+#ifndef FT_CONTAINERS_TYPE_TRAITS_HPP
+#define FT_CONTAINERS_TYPE_TRAITS_HPP
 
 namespace ft {
+
+	//	~~	ENABLE_IF ----------------------------------------------------------
+
+	template<bool B, class T = void>
+	struct enable_if {};
+
+	template<class T = void>
+	struct enable_if<true, T> {
+		typedef T type;
+	};
+
+	//	~~	IS_INTEGRAL --------------------------------------------------------
 
 	template<bool is_integral, typename T>
 	struct is_integral_res {
@@ -56,6 +68,7 @@ namespace ft {
 
 	template<typename T>
 	struct is_integral : public is_integral_type<T> {};
+
 }
 
-#endif //FT_CONTAINERS_IS_INTEGRAL_HPP
+#endif //FT_CONTAINERS_TYPE_TRAITS_HPP
