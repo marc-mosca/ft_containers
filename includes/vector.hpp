@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 11:15:00 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/05 18:19:43 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/06 11:02:18 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <memory>
 #include <iostream>
 #include <algorithm>
+#include "algorithm.hpp"
 #include "iterator.hpp"
 
 namespace ft {
@@ -38,11 +39,11 @@ namespace ft {
 
 		vector(const allocator_type &alloc = allocator_type()) : _alloc(alloc), _addr(nullptr), _len(0), _cap(0) {}
 		vector(size_type n, const value_type &val = value_type(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _addr(nullptr), _len(0), _cap(0) {
-			assign(n, val);
+			this->assign(n, val);
 		}
 		template<class Iter>
 		vector(Iter first, Iter last, const allocator_type &alloc = allocator_type()) : _alloc(alloc), _addr(nullptr), _len(0), _cap(0) {
-			assign(first, last);
+			this->assign(first, last);
 		}
 		vector(const vector &copy) : _addr(nullptr), _len(0), _cap(0) {
 			*this = copy;
@@ -55,17 +56,17 @@ namespace ft {
 		}
 		vector &operator=(const vector &other) {
 			this->_alloc = other._alloc;
-			assign(other.begin(), other.end());
+			this->assign(other.begin(), other.end());
 			return *this;
 		}
 		void assign(size_type count, const value_type &value) {
-			clear();
-			insert(begin(), count, value);
+			this->clear();
+			this->insert(this->begin(), count, value);
 		}
 		template<class InputIt>
 		void assign(InputIt first, InputIt last) {
-			clear();
-			insert(begin(), first, last);
+			this->clear();
+			this->insert(this->begin(), first, last);
 		}
 		allocator_type get_allocator() const {
 			return this->_alloc;
@@ -83,22 +84,22 @@ namespace ft {
 			return this->_addr[pos];
 		}
 		reference operator[](size_type pos) {
-			return *(begin() + pos);
+			return *(this->begin() + pos);
 		}
 		const_reference operator[](size_type pos) const {
 			return *(begin() + pos);
 		}
 		reference front() {
-			return *begin();
+			return *this->begin();
 		}
 		const_reference front() const {
-			return *begin();
+			return *this->begin();
 		}
 		reference back() {
-			return *(end() - (this->_len > 0));
+			return *(this->end() - (this->_len > 0));
 		}
 		const_reference back() const {
-			return *(end() - (this->_len > 0));
+			return *(this->end() - (this->_len > 0));
 		}
 		iterator begin() {
 			return iterator(this->_addr);
@@ -113,16 +114,16 @@ namespace ft {
 			return const_iterator(this->_addr + this->_len);
 		}
 		reverse_iterator rbegin() {
-			return reverse_iterator(end());
+			return reverse_iterator(this->end());
 		}
 		const_reverse_iterator rbegin() const {
-			return const_reverse_iterator(end());
+			return const_reverse_iterator(this->end());
 		}
 		reverse_iterator rend() {
-			return reverse_iterator(begin());
+			return reverse_iterator(this->begin());
 		}
 		const_reverse_iterator rend() const {
-			return const_reverse_iterator(begin());
+			return const_reverse_iterator(this->begin());
 		}
 		bool empty() const {
 			return this->_len == 0;
@@ -150,7 +151,7 @@ namespace ft {
 			return this->_cap;
 		}
 		void clear() {
-			erase(begin(), end());
+			this->erase(this->begin(), this->end());
 		}
 		iterator insert(iterator pos, const value_type &value) {
 			typename iterator_traits<iterator>::difference_type i = pos - this->begin();
@@ -224,6 +225,53 @@ namespace ft {
 			}
 			this->_len -= dist;
 			return first;
+		}
+		void push_back(const value_type &value) {
+			this->insert(this->end(), value);
+		}
+		void pop_back() {
+			this->erase(this->end() - 1);
+		}
+		void resize(size_type count, value_type value = value_type()) {
+			if (count == this->_len) {
+				return;
+			} else if (count > this->_len) {
+				this->insert(this->end(), count - this->_len, value);
+			} else {
+				this->erase(this->begin() + count, this->end());
+			}
+		}
+		void swap(vector &other) {
+			std::swap(this->_alloc, other._alloc);
+			std::swap(this->_addr, other._addr);
+			std::swap(this->_len, other._len);
+			std::swap(this->_cap, other._cap);
+		}
+
+		friend void swap(vector &v, vector &w) {
+			v.swap(w);
+		}
+		friend bool operator==(const vector &lhs, const vector &rhs) {
+			if (lhs.size() != rhs.size()) {
+				return false;
+			} else {
+				return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+			}
+		}
+		friend bool operator!=(const vector &lhs, const vector &rhs) {
+			return lhs != rhs;
+		}
+		friend bool operator<(const vector &lhs, const vector &rhs) {
+			return lhs < rhs;
+		}
+		friend bool operator<=(const vector &lhs, const vector &rhs) {
+			return lhs <= rhs;
+		}
+		friend bool operator>(const vector &lhs, const vector &rhs) {
+			return lhs > rhs;
+		}
+		friend bool operator>=(const vector &lhs, const vector &rhs) {
+			return lhs >= rhs;
 		}
 
 	private:
