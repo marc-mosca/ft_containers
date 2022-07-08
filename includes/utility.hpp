@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:25:16 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/07 18:53:52 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/08 22:00:30 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #define FT_CONTAINERS_UTILITY_HPP
 
 namespace ft {
+
+	template<class T>
+	void swap(T &x, T &y) {
+		T tmp = x;
+
+		x = y;
+		y = tmp;
+	}
 
 	/**
 	 * ft::pair is a class template that provides a way to store two heterogeneous objects as a single unit. A pair is a specific case of a std::tuple with two elements.
