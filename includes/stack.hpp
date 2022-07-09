@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:55:02 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/08 14:20:22 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:34:14 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ namespace ft {
 		 * Copy-constructs the underlying container c with the contents of cont.
 		 * @param cont container to be used as source to initialize the underlying container
 		 */
-		explicit stack(const container_type &cont = Container()) : c(cont) {}
+		explicit stack(const container_type &cont = container_type()) : c(cont) {}
 
 		/**
 		 * Destructs the stack.
@@ -51,7 +51,7 @@ namespace ft {
 		 * @return *this
 		 */
 		ft::stack<T, Container> &operator=(const ft::stack<T, Container> &other) {
-			this->c = other.c;
+			c = other.c;
 			return *this;
 		}
 
@@ -60,7 +60,7 @@ namespace ft {
 		 * @return reference to the last element
 		 */
 		reference top() {
-			this->c.back();
+			return c.back();
 		}
 
 		/**
@@ -68,7 +68,7 @@ namespace ft {
 		 * @return const reference to the last element
 		 */
 		const_reference top() const {
-			this->c.back();
+			return c.back();
 		}
 
 		/**
@@ -76,7 +76,7 @@ namespace ft {
 		 * @return true if the underlying container is empty, false otherwise
 		 */
 		bool empty() const {
-			return this->c.empty();
+			return c.empty();
 		}
 
 		/**
@@ -84,7 +84,7 @@ namespace ft {
 		 * @return the number of elements in the container
 		 */
 		size_type size() const {
-			return this->c.size();
+			return c.size();
 		}
 
 		/**
@@ -92,14 +92,14 @@ namespace ft {
 		 * @param value the value of the element to push
 		 */
 		void push(const value_type &value) {
-			this->c.push_back(value);
+			c.push_back(value);
 		}
 
 		/**
 		 * Removes the top element from the stack.
 		 */
 		void pop() {
-			this->c.pop_back();
+			c.pop_back();
 		}
 
 		/**
@@ -167,7 +167,7 @@ namespace ft {
 		friend bool operator>=(const ft::stack<Tx, Cx> &lhs, const ft::stack<Tx, Cx> &rhs) {
 			return lhs.c >= rhs.c;
 		}
-	private:
+	protected:
 		/**
 		 * Member objects
 		 */

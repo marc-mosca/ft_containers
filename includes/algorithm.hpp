@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:15:11 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/08 13:30:26 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:17:26 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ namespace ft {
 	 * @return if the elements in the two ranges are equal, returns true otherwise, returns false
 	 */
 	template<class InputIt1, class InputIt2>
-	bool equal(InputIt1 first, InputIt1 last, InputIt2 first2) {
+	bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
 		for (; first1 != last1; ++first1, ++first2) {
 			if (!(*first1 == *first2)) {
 				return false;
@@ -41,7 +41,7 @@ namespace ft {
 	 * @return if the elements in the two ranges are equal, returns true otherwise, returns false
 	 */
 	template<class InputIt1, class InputIt2, class BinaryPredicate>
-	bool equal(InputIt1 first, InputIt1 last, InputIt2 first2, BinaryPredicate p) {
+	bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2, BinaryPredicate p) {
 		for (; first1 != last1; ++first1, ++first2) {
 			if (!p(*first1, *first2)) {
 				return false;

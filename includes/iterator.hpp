@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:39:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/08 14:57:04 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/09 20:17:56 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ namespace ft {
 	 * @tparam Pointer defines a pointer to the type iterated over (T)
 	 * @tparam Reference defines a reference to the type iterated over (T)
 	 */
-	template<class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
+	template<class Category, class T, class Distance = ptrdiff_t, class Pointer = T*, class Reference = T&>
 	struct iterator {
 		/**
 		 * Member types
@@ -227,7 +227,7 @@ namespace ft {
 		 */
 		template<class U>
 		ft::reverse_iterator<Iter> &operator=(const ft::reverse_iterator<U> &other) {
-			this->current = other.base();
+			current = other.base();
 			return *this;
 		}
 
@@ -236,7 +236,7 @@ namespace ft {
 		 * @return the underlying iterator
 		 */
 		iterator_type base() const {
-			return this->current;
+			return current;
 		}
 
 		/**
@@ -244,8 +244,9 @@ namespace ft {
 		 * @return reference to the element previous to current
 		 */
 		reference operator*() const {
-			iterator_type tmp = this->base();
-			return *--tmp;
+			iterator_type tmp(current);
+			--tmp;
+			return *tmp;
 		}
 
 		/**
@@ -253,7 +254,7 @@ namespace ft {
 		 * @return pointer to the element previous to current
 		 */
 		pointer operator->() const {
-			iterator_type tmp = this->base();
+			iterator_type tmp(current);
 			--tmp;
 			return tmp.base();
 		}
@@ -264,7 +265,7 @@ namespace ft {
 		 * @return a reference to the element at relative location, that is, base()[-n-1]
 		 */
 		reference operator[](difference_type n) const {
-			return *(this->current.base() - n - 1);
+			return *(current.base() - n - 1);
 		}
 
 		/**
@@ -272,7 +273,7 @@ namespace ft {
 		 * @return *this
 		 */
 		ft::reverse_iterator<Iter> &operator++() {
-			--this->current;
+			--current;
 			return *this;
 		}
 
@@ -280,8 +281,8 @@ namespace ft {
 		 * Post-increments by one respectively.
 		 * @return a copy of *this that was made before the change
 		 */
-		ft::reverse_iterator<Iter> &operator++(int) {
-			iterator_type tmp = this->current--;
+		ft::reverse_iterator<Iter> operator++(int) {
+			iterator_type tmp(current--);
 			return tmp;
 		}
 
@@ -290,7 +291,7 @@ namespace ft {
 		 * @return *this
 		 */
 		ft::reverse_iterator<Iter> &operator--() {
-			++this->current;
+			++current;
 			return *this;
 		}
 
@@ -298,27 +299,9 @@ namespace ft {
 		 * Post-decrements by one respectively.
 		 * @return a copy of *this that was made before the change
 		 */
-		ft::reverse_iterator<Iter> &operator--(int) {
-			iterator_type tmp = this->current++;
+		ft::reverse_iterator<Iter> operator--(int) {
+			iterator_type tmp(current++);
 			return tmp;
-		}
-
-		/**
-		 * Returns an iterator which is advanced by n positions respectively.
-		 * @param n position relative to current location
-		 * @return reverse_iterator(base()-n)
-		 */
-		ft::reverse_iterator<Iter> &operator+(difference_type n) {
-			return this->base() - n;
-		}
-
-		/**
-		 * Returns an iterator which is advanced by -n positions respectively.
-		 * @param n position relative to current location
-		 * @return reverse_iterator(base()+n)
-		 */
-		ft::reverse_iterator<Iter> &operator-(difference_type n) {
-			return this->base() + n;
 		}
 
 		/**
@@ -327,7 +310,7 @@ namespace ft {
 		 * @return *this
 		 */
 		ft::reverse_iterator<Iter> &operator+=(difference_type n) {
-			this->current += n;
+			current -= n;
 			return *this;
 		}
 
@@ -337,74 +320,8 @@ namespace ft {
 		 * @return *this
 		 */
 		ft::reverse_iterator<Iter> &operator-=(difference_type n) {
-			this->current -= n;
+			current += n;
 			return *this;
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		template<class Iterator1, class Iterator2>
-		friend bool operator==(const ft::reverse_iterator<Iterator1> &lhs, const ft::reverse_iterator<Iterator2> &rhs) {
-			return lhs.base() == rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		template<class Iterator1, class Iterator2>
-		friend bool operator!=(const ft::reverse_iterator<Iterator1> &lhs, const ft::reverse_iterator<Iterator2> &rhs) {
-			return lhs.base() != rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		template<class Iterator1, class Iterator2>
-		friend bool operator>(const ft::reverse_iterator<Iterator1> &lhs, const ft::reverse_iterator<Iterator2> &rhs) {
-			return lhs.base() > rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		template<class Iterator1, class Iterator2>
-		friend bool operator>=(const ft::reverse_iterator<Iterator1> &lhs, const ft::reverse_iterator<Iterator2> &rhs) {
-			return lhs.base() >= rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		template<class Iterator1, class Iterator2>
-		friend bool operator<(const ft::reverse_iterator<Iterator1> &lhs, const ft::reverse_iterator<Iterator2> &rhs) {
-			return lhs.base() < rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		template<class Iterator1, class Iterator2>
-		friend bool operator<=(const ft::reverse_iterator<Iterator1> &lhs, const ft::reverse_iterator<Iterator2> &rhs) {
-			return lhs.base() <= rhs.base();
 		}
 
 	protected:
@@ -413,6 +330,102 @@ namespace ft {
 		 */
 		iterator_type current;
 	};
+
+	template <typename T>
+	bool operator==(const ft::reverse_iterator<T> &rhs,		const ft::reverse_iterator<T> &lhs)			{ return (lhs.base() == rhs.base()); }
+	template <typename U, typename V>
+	bool operator==(const ft::reverse_iterator<U> &rhs,		const ft::reverse_iterator<V> &lhs)			{ return (lhs.base() == rhs.base()); }
+
+
+	template <typename T>
+	bool operator!=(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() != rhs.base());
+	}
+
+	template <typename U, typename V>
+	bool operator!=(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
+		return (lhs.base() != rhs.base());
+	}
+
+	template <typename T>
+	bool operator>=(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() >= rhs.base());
+	}
+
+	template <typename U, typename V>
+	bool operator>=(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
+		return (lhs.base() >= rhs.base());
+	}
+
+	template <typename T>
+	bool operator<=(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() <= rhs.base());
+	}
+
+	template <typename U, typename V>
+	bool operator<=(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
+		return (lhs.base() <= rhs.base());
+	}
+
+	template <typename T>
+	bool operator>(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() > rhs.base());
+	}
+
+	template <typename U, typename V>
+	bool operator>(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
+		return (lhs.base() > rhs.base());
+	}
+
+	template <typename T>
+	bool operator<(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() < rhs.base());
+	}
+
+	template <typename U, typename V>
+	bool operator<(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
+		return (lhs.base() < rhs.base());
+	}
+
+	template <typename T>
+	ft::reverse_iterator<T> operator+(typename ft::reverse_iterator<T>::difference_type rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() - rhs);
+	}
+
+	template <typename U, typename V>
+	ft::reverse_iterator<U> operator+(typename ft::reverse_iterator<U>::difference_type rhs, const ft::reverse_iterator<V> &lhs) {
+		return (lhs.base() - rhs);
+	}
+
+	template <typename T>
+	ft::reverse_iterator<T> operator+(const ft::reverse_iterator<T> &rhs, typename ft::reverse_iterator<T>::difference_type lhs) {
+		return (rhs.base() - lhs);
+	}
+
+	template <typename U, typename V>
+	ft::reverse_iterator<U> operator+(const ft::reverse_iterator<U> &rhs, typename ft::reverse_iterator<V>::difference_type lhs) {
+		return (rhs.base() - lhs);
+	}
+
+	template <typename T>
+	ft::reverse_iterator<T> operator-(const ft::reverse_iterator<T> &rhs, typename ft::reverse_iterator<T>::difference_type lhs) {
+		return (rhs.base() + lhs);
+	}
+
+	template <typename U, typename V>
+	ft::reverse_iterator<U> operator-(const ft::reverse_iterator<U> &rhs, typename ft::reverse_iterator<V>::difference_type lhs) {
+		return (rhs.base() + lhs);
+	}
+
+	template <typename T>
+	typename ft::reverse_iterator<T>::difference_type operator-(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() - rhs.base());
+	}
+
+	template <typename U, typename V>
+	typename ft::reverse_iterator<U>::difference_type operator-(const ft::reverse_iterator<V> &rhs, const ft::reverse_iterator<U> &lhs) {
+		return (lhs.base() - rhs.base());
+	}
 
 	template<class T, class Container>
 	class vector_iterator {
@@ -454,8 +467,8 @@ namespace ft {
 		 * @param other iterator adaptor to assign
 		 * @return *this
 		 */
-		ft::vector_iterator<T, Container> &operator=(const ft::vector_iterator<T, Container> &other) {
-			this->_addr = other.base();
+		vector_iterator &operator=(const vector_iterator &other) {
+			_addr = other._addr;
 			return *this;
 		}
 
@@ -464,7 +477,7 @@ namespace ft {
 		 * @return the underlying iterator
 		 */
 		pointer base() const {
-			return this->_addr;
+			return _addr;
 		}
 
 		/**
@@ -472,8 +485,7 @@ namespace ft {
 		 * @return reference to the element previous to current
 		 */
 		reference operator*() const {
-			pointer tmp = this->base();
-			return *--tmp;
+			return *_addr;
 		}
 
 		/**
@@ -481,9 +493,7 @@ namespace ft {
 		 * @return pointer to the element previous to current
 		 */
 		pointer operator->() const {
-			pointer tmp = this->base();
-			--tmp;
-			return tmp.base();
+			return _addr;
 		}
 
 		/**
@@ -492,15 +502,15 @@ namespace ft {
 		 * @return a reference to the element at relative location, that is, base()[-n-1]
 		 */
 		reference operator[](difference_type n) const {
-			return *(this->current.base() - n - 1);
+			return *(_addr + n);
 		}
 
 		/**
 		 * Pre-increments by one respectively.
 		 * @return *this
 		 */
-		ft::vector_iterator<T, Container> &operator++() {
-			--this->current;
+		vector_iterator &operator++() {
+			++_addr;
 			return *this;
 		}
 
@@ -508,8 +518,8 @@ namespace ft {
 		 * Post-increments by one respectively.
 		 * @return a copy of *this that was made before the change
 		 */
-		ft::vector_iterator<T, Container> &operator++(int) {
-			ft::vector_iterator<T, Container> tmp = this->current--;
+		vector_iterator operator++(int) {
+			vector_iterator tmp = _addr++;
 			return tmp;
 		}
 
@@ -517,8 +527,8 @@ namespace ft {
 		 * Pre-decrements by one respectively.
 		 * @return *this
 		 */
-		ft::vector_iterator<T, Container> &operator--() {
-			++this->current;
+		vector_iterator &operator--() {
+			--_addr;
 			return *this;
 		}
 
@@ -526,27 +536,9 @@ namespace ft {
 		 * Post-decrements by one respectively.
 		 * @return a copy of *this that was made before the change
 		 */
-		ft::vector_iterator<T, Container> &operator--(int) {
-			ft::vector_iterator<T, Container> tmp = this->current++;
+		vector_iterator operator--(int) {
+			vector_iterator tmp = _addr--;
 			return tmp;
-		}
-
-		/**
-		 * Returns an iterator which is advanced by n positions respectively.
-		 * @param n position relative to current location
-		 * @return reverse_iterator(base()-n)
-		 */
-		ft::vector_iterator<T, Container> &operator+(difference_type n) {
-			return this->base() - n;
-		}
-
-		/**
-		 * Returns an iterator which is advanced by -n positions respectively.
-		 * @param n position relative to current location
-		 * @return reverse_iterator(base()+n)
-		 */
-		ft::vector_iterator<T, Container> &operator-(difference_type n) {
-			return this->base() + n;
 		}
 
 		/**
@@ -554,8 +546,8 @@ namespace ft {
 		 * @param n position relative to current location
 		 * @return *this
 		 */
-		ft::vector_iterator<T, Container> &operator+=(difference_type n) {
-			this->current += n;
+		vector_iterator &operator+=(difference_type n) {
+			_addr += n;
 			return *this;
 		}
 
@@ -564,75 +556,318 @@ namespace ft {
 		 * @param n position relative to current location
 		 * @return *this
 		 */
-		ft::vector_iterator<T, Container> &operator-=(difference_type n) {
-			this->current -= n;
+		vector_iterator &operator-=(difference_type n) {
+			_addr -= n;
 			return *this;
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		friend bool operator==(const ft::vector_iterator<T, Container> &lhs, const ft::vector_iterator<T, Container> &rhs) {
-			return lhs.base() == rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		friend bool operator!=(const ft::vector_iterator<T, Container> &lhs, const ft::vector_iterator<T, Container> &rhs) {
-			return lhs.base() != rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		friend bool operator>(const ft::vector_iterator<T, Container> &lhs, const ft::vector_iterator<T, Container> &rhs) {
-			return lhs.base() > rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		friend bool operator>=(const ft::vector_iterator<T, Container> &lhs, const ft::vector_iterator<T, Container> &rhs) {
-			return lhs.base() >= rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		template<class Iterator1, class Iterator2>
-		friend bool operator<(const ft::vector_iterator<T, Container> &lhs, const ft::vector_iterator<T, Container> &rhs) {
-			return lhs.base() < rhs.base();
-		}
-
-		/**
-		 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
-		 * @param lhs iterator adaptors to compare
-		 * @param rhs iterator adaptors to compare
-		 * @return true if the corresponding comparison yields true, false otherwise
-		 */
-		friend bool operator<=(const ft::vector_iterator<T, Container> &lhs, const ft::vector_iterator<T, Container> &rhs) {
-			return lhs.base() <= rhs.base();
 		}
 
 	protected:
 		pointer _addr;
 	};
+
+	template <typename T, typename Container>
+	bool operator==(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (lhs.base() == rhs.base());
+	}
+
+	template <typename U, typename V, typename Container>
+	bool operator==(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
+		return (lhs.base() == rhs.base());
+	}
+
+	template <typename T, typename Container>
+	bool operator!=(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (lhs.base() != rhs.base());
+
+	}
+
+	template <typename U, typename V, typename Container>
+	bool operator!=(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
+		return (lhs.base() != rhs.base());
+
+	}
+
+	template <typename T, typename Container>
+	bool operator>=(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (lhs.base() <= rhs.base());
+
+	}
+
+	template <typename U, typename V, typename Container>
+	bool operator>=(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
+		return (lhs.base() <= rhs.base());
+
+	}
+
+	template <typename T, typename Container>
+	bool operator<=(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (lhs.base() >= rhs.base());
+
+	}
+
+	template <typename U, typename V, typename Container>
+	bool operator<=(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
+		return (lhs.base() >= rhs.base());
+	}
+
+	template <typename T, typename Container>
+	bool operator>(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (lhs.base() < rhs.base());
+	}
+
+	template <typename U, typename V, typename Container>
+	bool operator>(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
+		return (lhs.base() < rhs.base());
+	}
+
+	template <typename T, typename Container>
+	bool operator<(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (lhs.base() > rhs.base());
+	}
+
+	template <typename U, typename V, typename Container>
+	bool operator<(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
+		return (lhs.base() > rhs.base());
+	}
+
+	template <typename T, typename Container>
+	ft::vector_iterator<T, Container> operator+(typename ft::vector_iterator<T, Container>::difference_type rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (lhs.base() + rhs);
+	}
+
+	template <typename T, typename Container>
+	ft::vector_iterator<T, Container> operator+(const ft::vector_iterator<T, Container> &rhs, typename ft::vector_iterator<T, Container>::difference_type lhs) {
+		return (rhs.base() + lhs);
+	}
+
+	template <typename T, typename Container>
+	ft::vector_iterator<T, Container> operator-(const ft::vector_iterator<T, Container> &rhs, typename ft::vector_iterator<T, Container>::difference_type lhs) {
+		return (rhs.base() - lhs);
+	}
+
+	template <typename T, typename Container>
+	typename ft::vector_iterator<T, Container>::difference_type operator-(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
+		return (rhs.base() - lhs.base());
+	}
+
+	template <typename U, typename V, typename Container>
+	typename ft::vector_iterator<U, Container>::difference_type operator-(const ft::vector_iterator<V, Container> &rhs, const ft::vector_iterator<U, Container> &lhs) {
+		return (rhs.base() - lhs.base());
+	}
+
+	template<typename T>
+	class avl_iterator : ft::iterator<ft::bidirectional_iterator_tag, T> {
+	public:
+		/**
+		 * Member types
+		 */
+		typedef typename T::value_type value_type;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::iterator_category iterator_category;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::difference_type difference_type;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::pointer pointer;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::reference reference;
+
+		/**
+		 * Member objects
+		 */
+		T *_node;
+		T *_first_node;
+		T *_last_node;
+		bool _end;
+
+		/**
+		 * Default constructor.
+		 */
+		avl_iterator() : _node(), _first_node(), _last_node(), _end(false) {}
+
+		/**
+		 * Constructor with initialized _addr with T* values.
+		 * @param node pointer to set
+		 * @param first pointer to set
+		 * @param last pointer to set
+		 */
+		avl_iterator(T *node, T *first, T *last) : _node(node), _first_node(first), _last_node(last), _end(node == nullptr) {}
+
+		/**
+		 * Avl iterator is initialized with that of copy.
+		 * @param avl_it avl iterator to copy
+		 */
+		template<typename U>
+		avl_iterator(const ft::avl_iterator<U> &avl_it) : _node(avl_it._node), _first_node(avl_it._first_node), _last_node(avl_it._last_node), _end(avl_it._end == nullptr) {}
+
+		/**
+		 * Destructor.
+		 */
+		~avl_iterator() {}
+
+		/**
+		 * The underlying iterator is assigned the value of the underlying iterator of other.
+		 * @param other iterator adaptor to assign
+		 * @return *this
+		 */
+		ft::avl_iterator<T> &operator=(const ft::avl_iterator<T> &other) {
+			_node = other._node;
+			_first_node = other._node;
+			_last_node = other._last_node;
+			_end = other._end;
+			return *this;
+		}
+
+		/**
+		 * Returns a reference to the element previous to current.
+		 * @return reference to the element previous to current
+		 */
+		reference operator*() const {
+			return _node->value;
+		}
+
+		/**
+		 * Returns a pointer to the element previous to current.
+		 * @return pointer to the element previous to current
+		 */
+		pointer operator->() const {
+			return base();
+		}
+
+		/**
+		 * Returns the underlying base iterator.
+		 * @return the underlying iterator
+		 */
+		pointer base() const {
+			return &_node->value;
+		}
+
+		/**
+		 * Pre-increments by one respectively.
+		 * @return *this
+		 */
+		ft::avl_iterator<T> &operator++() {
+			T *tmp;
+
+			if (!_node) {
+				return *this;
+			}
+			if (!_node->right) {
+				if (_node == _last_node) {
+					_end = true;
+					_node = nullptr;
+					return *this;
+				}
+				tmp = _node;
+				_node = _node->parent;
+				while (_node->right && tmp == _node->right) {
+					tmp = _node;
+					_node = _node->parent;
+				}
+				return *this;
+			}
+			_node = _node->right;
+			while (_node->left) {
+				_node = _node->left;
+			}
+			return *this;
+		}
+
+		/**
+		 * Post-increments by one respectively.
+		 * @return a copy of *this that was made before the change
+		 */
+		ft::avl_iterator<T> &operator++(int) {
+			ft::avl_iterator<T> tmp(*this);
+			++*this;
+			return tmp;
+		}
+
+		/**
+		 * Pre-decrements by one respectively.
+		 * @return *this
+		 */
+		ft::avl_iterator<T> &operator--() {
+			T *tmp;
+
+			if (!_node && _end) {
+				_node = _last_node;
+				_end = false;
+				return *this;
+			}
+			if (!_node) {
+				return *this;
+			}
+			if (!_node->left) {
+				if (_node == _first_node) {
+					_node = nullptr;
+					return *this;
+				}
+				tmp = _node;
+				_node = _node->parent;
+				while (_node->left && tmp == _node->left) {
+					tmp = _node;
+					_node = _node->parent;
+				}
+				return *this;
+			}
+			_node = _node->left;
+			while (_node == _node->right) {
+				_node = _node->right;
+			}
+			return *this;
+		}
+
+		/**
+		 * Post-decrements by one respectively.
+		 * @return a copy of *this that was made before the change
+		 */
+		ft::avl_iterator<T> &operator--(int) {
+			ft::avl_iterator<T> tmp(*this);
+			--*this;
+			return tmp;
+		}
+
+	};
+
+	/**
+	 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
+	 * @param lhs iterator adaptors to compare
+	 * @param rhs iterator adaptors to compare
+	 * @return true if the corresponding comparison yields true, false otherwise
+	 */
+	template<typename T>
+	bool operator==(const ft::avl_iterator<T> &lhs, const ft::avl_iterator<T> &rhs) {
+		return lhs._node == rhs._node;
+	}
+
+	/**
+	 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
+	 * @param lhs iterator adaptors to compare
+	 * @param rhs iterator adaptors to compare
+	 * @return true if the corresponding comparison yields true, false otherwise
+	 */
+	template<typename U, typename V>
+	bool operator==(const ft::avl_iterator<U> &lhs, const ft::avl_iterator<V> &rhs) {
+		return lhs._node == rhs._node;
+	}
+
+	/**
+	 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
+	 * @param lhs iterator adaptors to compare
+	 * @param rhs iterator adaptors to compare
+	 * @return true if the corresponding comparison yields true, false otherwise
+	 */
+	template<typename T>
+	bool operator!=(const ft::avl_iterator<T> &lhs, const ft::avl_iterator<T> &rhs) {
+		return lhs._node != rhs._node;
+	}
+
+	/**
+	 * Compares the underlying iterators. Inverse comparisons are applied in order to take into account that the iterator order is reversed.
+	 * @param lhs iterator adaptors to compare
+	 * @param rhs iterator adaptors to compare
+	 * @return true if the corresponding comparison yields true, false otherwise
+	 */
+	template<typename U, typename V>
+	bool operator!=(const ft::avl_iterator<U> &lhs, const ft::avl_iterator<V> &rhs) {
+		return lhs._node != rhs._node;
+	}
 
 }
 

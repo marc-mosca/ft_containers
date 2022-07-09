@@ -73,8 +73,8 @@ namespace ft {
 		 */
 		template<class U1, class U2>
 		ft::pair<T1, T2> &operator=(const ft::pair<U1, U2> &other) {
-			this->first = other.first;
-			this->second = other.second;
+			first = other.first;
+			second = other.second;
 			return *this;
 		}
 	};
