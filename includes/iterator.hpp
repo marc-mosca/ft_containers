@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:39:57 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/09 20:17:56 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/12 16:58:50 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,97 +331,221 @@ namespace ft {
 		iterator_type current;
 	};
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() == rhs.base()
+	 */
 	template <typename T>
-	bool operator==(const ft::reverse_iterator<T> &rhs,		const ft::reverse_iterator<T> &lhs)			{ return (lhs.base() == rhs.base()); }
+	bool operator==(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
+		return (lhs.base() == rhs.base());
+	}
+
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() == rhs.base()
+	 */
 	template <typename U, typename V>
-	bool operator==(const ft::reverse_iterator<U> &rhs,		const ft::reverse_iterator<V> &lhs)			{ return (lhs.base() == rhs.base()); }
+	bool operator==(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
+		return (lhs.base() == rhs.base());
+	}
 
-
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() != rhs.base()
+	 */
 	template <typename T>
 	bool operator!=(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
 		return (lhs.base() != rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() != rhs.base()
+	 */
 	template <typename U, typename V>
 	bool operator!=(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
 		return (lhs.base() != rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() >= rhs.base()
+	 */
 	template <typename T>
 	bool operator>=(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
 		return (lhs.base() >= rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() >= rhs.base()
+	 */
 	template <typename U, typename V>
 	bool operator>=(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
 		return (lhs.base() >= rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() <= rhs.base()
+	 */
 	template <typename T>
 	bool operator<=(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
 		return (lhs.base() <= rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() <= rhs.base()
+	 */
 	template <typename U, typename V>
 	bool operator<=(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
 		return (lhs.base() <= rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() > rhs.base()
+	 */
 	template <typename T>
 	bool operator>(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
 		return (lhs.base() > rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() > rhs.base()
+	 */
 	template <typename U, typename V>
 	bool operator>(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
 		return (lhs.base() > rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() < rhs.base()
+	 */
 	template <typename T>
 	bool operator<(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
 		return (lhs.base() < rhs.base());
 	}
 
+	/**
+	 * Compares the underlying iterators.
+	 * @param rhs iterator adaptors to compare
+	 * @param lhs iterator adaptors to compare
+	 * @return lhs.base() < rhs.base()
+	 */
 	template <typename U, typename V>
 	bool operator<(const ft::reverse_iterator<U> &rhs, const ft::reverse_iterator<V> &lhs) {
 		return (lhs.base() < rhs.base());
 	}
 
+	/**
+	 * Returns the iterator it incremented by n.
+	 * @param n the number of positions to increment the iterator
+	 * @param it the iterator adaptor to increment
+	 * @return the incremented iterator
+	 */
 	template <typename T>
-	ft::reverse_iterator<T> operator+(typename ft::reverse_iterator<T>::difference_type rhs, const ft::reverse_iterator<T> &lhs) {
-		return (lhs.base() - rhs);
+	ft::reverse_iterator<T> operator+(typename ft::reverse_iterator<T>::difference_type n, const ft::reverse_iterator<T> &it) {
+		return (it.base() - n);
 	}
 
+	/**
+	 * Returns the iterator it incremented by n.
+	 * @param n the number of positions to increment the iterator
+	 * @param it the iterator adaptor to increment
+	 * @return the incremented iterator
+	 */
 	template <typename U, typename V>
-	ft::reverse_iterator<U> operator+(typename ft::reverse_iterator<U>::difference_type rhs, const ft::reverse_iterator<V> &lhs) {
-		return (lhs.base() - rhs);
+	ft::reverse_iterator<U> operator+(typename ft::reverse_iterator<U>::difference_type n, const ft::reverse_iterator<V> &it) {
+		return (it.base() - n);
 	}
 
+	/**
+	 * Returns the iterator it incremented by n.
+	 * @param n the number of positions to increment the iterator
+	 * @param it the iterator adaptor to increment
+	 * @return the incremented iterator
+	 */
 	template <typename T>
-	ft::reverse_iterator<T> operator+(const ft::reverse_iterator<T> &rhs, typename ft::reverse_iterator<T>::difference_type lhs) {
-		return (rhs.base() - lhs);
+	ft::reverse_iterator<T> operator+(const ft::reverse_iterator<T> &it, typename ft::reverse_iterator<T>::difference_type n) {
+		return (it.base() - n);
 	}
 
+	/**
+	 * Returns the iterator it incremented by n.
+	 * @param n the number of positions to increment the iterator
+	 * @param it the iterator adaptor to increment
+	 * @return the incremented iterator
+	 */
 	template <typename U, typename V>
-	ft::reverse_iterator<U> operator+(const ft::reverse_iterator<U> &rhs, typename ft::reverse_iterator<V>::difference_type lhs) {
-		return (rhs.base() - lhs);
+	ft::reverse_iterator<U> operator+(const ft::reverse_iterator<U> &it, typename ft::reverse_iterator<V>::difference_type n) {
+		return (it.base() - n);
 	}
 
+	/**
+	 * Returns the iterator it decremented by n.
+	 * @param n the number of positions to decremented the iterator
+	 * @param it the iterator adaptor to decrement
+	 * @return the decrement iterator
+	 */
 	template <typename T>
-	ft::reverse_iterator<T> operator-(const ft::reverse_iterator<T> &rhs, typename ft::reverse_iterator<T>::difference_type lhs) {
-		return (rhs.base() + lhs);
+	ft::reverse_iterator<T> operator-(const ft::reverse_iterator<T> &it, typename ft::reverse_iterator<T>::difference_type n) {
+		return (it.base() + n);
 	}
 
+	/**
+	 * Returns the iterator it decremented by n.
+	 * @param n the number of positions to decremented the iterator
+	 * @param it the iterator adaptor to decrement
+	 * @return the decrement iterator
+	 */
 	template <typename U, typename V>
-	ft::reverse_iterator<U> operator-(const ft::reverse_iterator<U> &rhs, typename ft::reverse_iterator<V>::difference_type lhs) {
-		return (rhs.base() + lhs);
+	ft::reverse_iterator<U> operator-(const ft::reverse_iterator<U> &it, typename ft::reverse_iterator<V>::difference_type n) {
+		return (it.base() + n);
 	}
 
+	/**
+	 * Returns the iterator it decremented by n.
+	 * @param n the number of positions to decremented the iterator
+	 * @param it the iterator adaptor to decrement
+	 * @return the decrement iterator
+	 */
 	template <typename T>
-	typename ft::reverse_iterator<T>::difference_type operator-(const ft::reverse_iterator<T> &rhs, const ft::reverse_iterator<T> &lhs) {
-		return (lhs.base() - rhs.base());
+	typename ft::reverse_iterator<T>::difference_type operator-(const ft::reverse_iterator<T> &it, const ft::reverse_iterator<T> &it2) {
+		return (it2.base() - it.base());
 	}
 
+	/**
+	 * Returns the iterator it decremented by n.
+	 * @param n the number of positions to decremented the iterator
+	 * @param it the iterator adaptor to decrement
+	 * @return the decrement iterator
+	 */
 	template <typename U, typename V>
 	typename ft::reverse_iterator<U>::difference_type operator-(const ft::reverse_iterator<V> &rhs, const ft::reverse_iterator<U> &lhs) {
 		return (lhs.base() - rhs.base());
@@ -562,110 +686,215 @@ namespace ft {
 		}
 
 	protected:
+		/**
+		 * Member objects
+		 */
 		pointer _addr;
 	};
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are equal, false otherwise
+	 */
 	template <typename T, typename Container>
 	bool operator==(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
 		return (lhs.base() == rhs.base());
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are equal, false otherwise
+	 */
 	template <typename U, typename V, typename Container>
 	bool operator==(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
 		return (lhs.base() == rhs.base());
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are not equal, false otherwise
+	 */
 	template <typename T, typename Container>
 	bool operator!=(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
 		return (lhs.base() != rhs.base());
 
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are not equal, false otherwise
+	 */
 	template <typename U, typename V, typename Container>
 	bool operator!=(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
 		return (lhs.base() != rhs.base());
 
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are >=, false otherwise
+	 */
 	template <typename T, typename Container>
 	bool operator>=(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
 		return (lhs.base() <= rhs.base());
 
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are >=, false otherwise
+	 */
 	template <typename U, typename V, typename Container>
 	bool operator>=(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
 		return (lhs.base() <= rhs.base());
 
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are <=, false otherwise
+	 */
 	template <typename T, typename Container>
 	bool operator<=(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
 		return (lhs.base() >= rhs.base());
 
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are <=, false otherwise
+	 */
 	template <typename U, typename V, typename Container>
 	bool operator<=(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
 		return (lhs.base() >= rhs.base());
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are >, false otherwise
+	 */
 	template <typename T, typename Container>
 	bool operator>(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
 		return (lhs.base() < rhs.base());
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are >, false otherwise
+	 */
 	template <typename U, typename V, typename Container>
 	bool operator>(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
 		return (lhs.base() < rhs.base());
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are <, false otherwise
+	 */
 	template <typename T, typename Container>
 	bool operator<(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
 		return (lhs.base() > rhs.base());
 	}
 
+	/**
+	 * Compares the contents of two vectors iterator
+	 * @param rhs vectors iterator whose contents to compare
+	 * @param lhs vectors iterator whose contents to compare
+	 * @return true if the two iterator are <, false otherwise
+	 */
 	template <typename U, typename V, typename Container>
 	bool operator<(const ft::vector_iterator<U, Container> &rhs, const ft::vector_iterator<V, Container> &lhs) {
 		return (lhs.base() > rhs.base());
 	}
 
+	/**
+	 * Returns the iterator it incremented by n.
+	 * @param n the number of positions to increment the iterator
+	 * @param it the iterator adaptor to increment
+	 * @return the incremented iterator
+	 */
 	template <typename T, typename Container>
-	ft::vector_iterator<T, Container> operator+(typename ft::vector_iterator<T, Container>::difference_type rhs, const ft::vector_iterator<T, Container> &lhs) {
-		return (lhs.base() + rhs);
+	ft::vector_iterator<T, Container> operator+(typename ft::vector_iterator<T, Container>::difference_type n, const ft::vector_iterator<T, Container> &it) {
+		return (it.base() + n);
 	}
 
+	/**
+	 * Returns the iterator it incremented by n.
+	 * @param n the number of positions to increment the iterator
+	 * @param it the iterator adaptor to increment
+	 * @return the incremented iterator
+	 */
 	template <typename T, typename Container>
-	ft::vector_iterator<T, Container> operator+(const ft::vector_iterator<T, Container> &rhs, typename ft::vector_iterator<T, Container>::difference_type lhs) {
-		return (rhs.base() + lhs);
+	ft::vector_iterator<T, Container> operator+(const ft::vector_iterator<T, Container> &it, typename ft::vector_iterator<T, Container>::difference_type n) {
+		return (it.base() + n);
 	}
 
+	/**
+	 * Returns the iterator it decremented by n.
+	 * @param n the number of positions to decremented the iterator
+	 * @param it the iterator adaptor to decrement
+	 * @return the decrement iterator
+	 */
 	template <typename T, typename Container>
-	ft::vector_iterator<T, Container> operator-(const ft::vector_iterator<T, Container> &rhs, typename ft::vector_iterator<T, Container>::difference_type lhs) {
-		return (rhs.base() - lhs);
+	ft::vector_iterator<T, Container> operator-(const ft::vector_iterator<T, Container> &it, typename ft::vector_iterator<T, Container>::difference_type n) {
+		return (it.base() - n);
 	}
 
+	/**
+	 * Returns the iterator it decremented by n.
+	 * @param n the number of positions to decremented the iterator
+	 * @param it the iterator adaptor to decrement
+	 * @return the decrement iterator
+	 */
 	template <typename T, typename Container>
-	typename ft::vector_iterator<T, Container>::difference_type operator-(const ft::vector_iterator<T, Container> &rhs, const ft::vector_iterator<T, Container> &lhs) {
-		return (rhs.base() - lhs.base());
+	typename ft::vector_iterator<T, Container>::difference_type operator-(const ft::vector_iterator<T, Container> &it, const ft::vector_iterator<T, Container> &n) {
+		return (it.base() - n.base());
 	}
 
+	/**
+	 * Returns the iterator it decremented by n.
+	 * @param n the number of positions to decremented the iterator
+	 * @param it the iterator adaptor to decrement
+	 * @return the decrement iterator
+	 */
 	template <typename U, typename V, typename Container>
-	typename ft::vector_iterator<U, Container>::difference_type operator-(const ft::vector_iterator<V, Container> &rhs, const ft::vector_iterator<U, Container> &lhs) {
-		return (rhs.base() - lhs.base());
+	typename ft::vector_iterator<U, Container>::difference_type operator-(const ft::vector_iterator<V, Container> &it, const ft::vector_iterator<U, Container> &n) {
+		return (it.base() - n.base());
 	}
 
 	template<typename T>
-	class avl_iterator : ft::iterator<ft::bidirectional_iterator_tag, T> {
+	class avl_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T> {
 	public:
 		/**
 		 * Member types
 		 */
 		typedef typename T::value_type value_type;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::iterator_category iterator_category;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::difference_type difference_type;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::pointer pointer;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::reference reference;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::iterator_category iterator_category;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::difference_type difference_type;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::pointer pointer;
+		typedef typename ft::iterator<ft::bidirectional_iterator_tag, value_type>::reference reference;
 
 		/**
 		 * Member objects
@@ -726,7 +955,7 @@ namespace ft {
 		 * @return pointer to the element previous to current
 		 */
 		pointer operator->() const {
-			return base();
+			return &_node->value;
 		}
 
 		/**
@@ -772,7 +1001,7 @@ namespace ft {
 		 * Post-increments by one respectively.
 		 * @return a copy of *this that was made before the change
 		 */
-		ft::avl_iterator<T> &operator++(int) {
+		ft::avl_iterator<T> operator++(int) {
 			ft::avl_iterator<T> tmp(*this);
 			++*this;
 			return tmp;
@@ -807,7 +1036,7 @@ namespace ft {
 				return *this;
 			}
 			_node = _node->left;
-			while (_node == _node->right) {
+			while (_node->right) {
 				_node = _node->right;
 			}
 			return *this;
@@ -817,7 +1046,7 @@ namespace ft {
 		 * Post-decrements by one respectively.
 		 * @return a copy of *this that was made before the change
 		 */
-		ft::avl_iterator<T> &operator--(int) {
+		ft::avl_iterator<T> operator--(int) {
 			ft::avl_iterator<T> tmp(*this);
 			--*this;
 			return tmp;

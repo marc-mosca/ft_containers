@@ -6,7 +6,7 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 22:13:51 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/09 19:12:00 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/13 11:07:50 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 namespace ft {
 
 	template<typename U, typename V>
-	class AvlNode {
+	class Node {
 	public:
 		/**
 		 * Member types
@@ -32,21 +32,21 @@ namespace ft {
 		 * Member objects
 		 */
 		value_type value;
-		AvlNode *parent;
-		AvlNode *left;
-		AvlNode *right;
+		Node *parent;
+		Node *left;
+		Node *right;
 
 		/**
 		 * Constructor initialized value with value.
 		 * @param value value to initialized
 		 */
-		AvlNode(const value_type &value) : _height(1), value(value), left(nullptr), right(nullptr) {}
+		Node(const value_type &value) : value(value), left(nullptr), right(nullptr), _height(1) {}
 
 		/**
 		 * Returns the max value in the tree.
 		 * @return the max value in the tree
 		 */
-		ft::AvlNode<U, V> *getMax() {
+		Node *getMax() {
 			return right ? right->getMax() : this;
 		}
 
@@ -54,7 +54,7 @@ namespace ft {
 		 * Returns the min value in the tree.
 		 * @return the min value in the tree
 		 */
-		ft::AvlNode<U, V> *getMin() {
+		Node *getMin() {
 			return left ? left->getMin() : this;
 		}
 
@@ -69,7 +69,7 @@ namespace ft {
 		 * Returns the height of the tree.
 		 * @return the height of the tree
 		 */
-		unsigned int height() const {
+		long height() const {
 			return _height;
 		}
 
@@ -85,10 +85,10 @@ namespace ft {
 		/**
 		 * Member objects
 		 */
-		unsigned int _height;
+		long _height;
 	};
 
-	template<typename U, typename V, class Node = AvlNode<U, V>, class Allocator = std::allocator<Node> >
+	template<typename U, typename V, class Node = Node<U, V>, class Allocator = std::allocator<Node> >
 	class avl_tree {
 	public:
 		/**
@@ -98,8 +98,8 @@ namespace ft {
 		typedef Node node_type;
 		typedef Node* node_pointer;
 		typedef Allocator node_allocator;
-		typedef ft::avl_iterator<Node> iterator;
-		typedef ft::avl_iterator<Node> const_iterator;
+		typedef typename ft::avl_iterator<Node> iterator;
+		typedef typename ft::avl_iterator<Node> const_iterator;
 		typedef typename node_allocator::size_type size_type;
 
 		/**
@@ -174,10 +174,10 @@ namespace ft {
 			return _root ? const_iterator(nullptr, _root->getMin(), _root->getMax()) : const_iterator();
 		}
 
-		void swap(ft::avl_tree<U, V, Node, Allocator> &t) {
+		void swap(avl_tree &t) {
 			node_type *tmpRoot = _root;
-			node_type *tmpAllocator = _alloc;
-			node_type *tmpSize = _size;
+			node_allocator tmpAllocator = _alloc;
+			size_t tmpSize = _size;
 
 			_root = t._root;
 			_alloc = t._alloc;

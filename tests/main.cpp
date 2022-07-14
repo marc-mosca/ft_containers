@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 15:13:23 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/09 16:03:22 by mmosca           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <iostream>
 
 #include "../includes/map.hpp"
@@ -32,11 +20,14 @@ int main(int argc, char **argv)
 		choice = std::string(argv[1]);
 	if (choice == "vector")
 		test_vector();
+	else if (choice == "map")
+		test_map();
 	else if (choice == "stack")
 		test_stack();
 	else if (choice == "all")
 	{
 		test_vector();
+		test_map();
 		test_stack();
 	}
 	else

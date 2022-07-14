@@ -6,12 +6,11 @@
 /*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 15:14:33 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/09 16:09:29 by mmosca           ###   ########.fr       */
+/*   Updated: 2022/07/10 17:10:21 by mmosca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.hpp"
-#include <iostream>
 
 static void constructors(void)
 {

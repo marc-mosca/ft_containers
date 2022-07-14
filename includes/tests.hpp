@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tests.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mmosca <mmosca@student.42lyon.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 15:16:48 by mmosca            #+#    #+#             */
-/*   Updated: 2022/07/09 20:14:03 by mmosca           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef TESTS_HPP
 # define TESTS_HPP
 
@@ -19,6 +7,7 @@
 # include <stack>
 # include <queue>
 # include <iostream>
+# include "../includes/vector.hpp"
 # include "../includes/map.hpp"
 # include "../includes/stack.hpp"
 
@@ -40,6 +29,7 @@
 # define FAIL "❌"
 
 void	test_vector(void);
+void	test_map(void);
 void	test_stack(void);
 
 inline void print_header(std::string str)
@@ -83,6 +73,25 @@ bool operator==(ft::vector<T> &a, std::vector<T> &b)
 	{
 		if (a[i] != b[i])
 			return (false);
+	}
+	return (true);
+};
+
+template <typename T, typename S>
+bool operator==(ft::map<T, S> &a, std::map<T, S> &b)
+{
+	if (a.size() != b.size())
+		return (false);
+	if (a.empty() != b.empty())
+		return (false);
+	typename ft::map<T, S>::iterator it = a.begin();
+	typename std::map<T, S>::iterator it2 = b.begin();
+	while (it != a.end())
+	{
+		if (it->first != it2->first || it->second != it2->second)
+			return (false);
+		++it;
+		++it2;
 	}
 	return (true);
 };
